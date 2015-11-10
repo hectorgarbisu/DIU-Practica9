@@ -1,3 +1,7 @@
+
+import java.util.Collections;
+import java.util.List;
+import javax.swing.ListSelectionModel;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -29,6 +33,7 @@ public class MainFrame extends javax.swing.JFrame {
         buttonGroup = new javax.swing.ButtonGroup();
         authorLabel = new javax.swing.JLabel();
         datoPane = new javax.swing.JPanel();
+        datoTextField = new javax.swing.JTextField();
         addTolista1Button = new javax.swing.JButton();
         lista1Pane = new javax.swing.JPanel();
         lista1ScrollPane = new javax.swing.JScrollPane();
@@ -53,40 +58,65 @@ public class MainFrame extends javax.swing.JFrame {
 
         datoPane.setBorder(javax.swing.BorderFactory.createTitledBorder("Dato"));
 
+        datoTextField.setText(" ");
+
         javax.swing.GroupLayout datoPaneLayout = new javax.swing.GroupLayout(datoPane);
         datoPane.setLayout(datoPaneLayout);
         datoPaneLayout.setHorizontalGroup(
             datoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(datoPaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(datoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addContainerGap())
         );
         datoPaneLayout.setVerticalGroup(
             datoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 22, Short.MAX_VALUE)
+            .addComponent(datoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         addTolista1Button.setText("A Lista1 ->");
+        addTolista1Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTolista1ButtonActionPerformed(evt);
+            }
+        });
 
         lista1Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista 1"));
 
-        lista1Lista.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         lista1ScrollPane.setViewportView(lista1Lista);
 
         resetSelectionButton.setText("Reset Seleción");
+        resetSelectionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetSelectionButtonActionPerformed(evt);
+            }
+        });
 
         modoPane.setBorder(javax.swing.BorderFactory.createTitledBorder("Modo de Selección"));
 
         buttonGroup.add(simplebutton);
-        simplebutton.setText("jToggleButton1");
+        simplebutton.setText("Simple");
+        simplebutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simplebuttonActionPerformed(evt);
+            }
+        });
 
         buttonGroup.add(invervaloSimpleButton);
-        invervaloSimpleButton.setText("jToggleButton2");
+        invervaloSimpleButton.setText("Intervalo Simple");
+        invervaloSimpleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invervaloSimpleButtonActionPerformed(evt);
+            }
+        });
 
         buttonGroup.add(multiplesIntervalosButton);
-        multiplesIntervalosButton.setText("jToggleButton3");
+        multiplesIntervalosButton.setText("Multiples Intervalos");
+        multiplesIntervalosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multiplesIntervalosButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout modoPaneLayout = new javax.swing.GroupLayout(modoPane);
         modoPane.setLayout(modoPaneLayout);
@@ -94,10 +124,10 @@ public class MainFrame extends javax.swing.JFrame {
             modoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modoPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(modoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(simplebutton)
-                    .addComponent(invervaloSimpleButton)
-                    .addComponent(multiplesIntervalosButton))
+                .addGroup(modoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(multiplesIntervalosButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(invervaloSimpleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(simplebutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         modoPaneLayout.setVerticalGroup(
@@ -119,15 +149,10 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(lista1PaneLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(lista1PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lista1PaneLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(resetSelectionButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(lista1PaneLayout.createSequentialGroup()
-                        .addGroup(lista1PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lista1ScrollPane)
-                            .addComponent(modoPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                    .addComponent(resetSelectionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lista1ScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(modoPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         lista1PaneLayout.setVerticalGroup(
             lista1PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,34 +167,41 @@ public class MainFrame extends javax.swing.JFrame {
 
         lista2Pane.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista 2"));
 
-        lista2Lista.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         lista2ScrollPane.setViewportView(lista2Lista);
 
         resetListaButton.setText("Reset Lista");
+        resetListaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetListaButtonActionPerformed(evt);
+            }
+        });
 
         borraSeleccionButton.setText("Borra Selección");
+        borraSeleccionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borraSeleccionButtonActionPerformed(evt);
+            }
+        });
 
         ordenaListaButton.setText("Ordena Lista");
+        ordenaListaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ordenaListaButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout lista2PaneLayout = new javax.swing.GroupLayout(lista2Pane);
         lista2Pane.setLayout(lista2PaneLayout);
         lista2PaneLayout.setHorizontalGroup(
             lista2PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lista2PaneLayout.createSequentialGroup()
+            .addGroup(lista2PaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lista2ScrollPane)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lista2PaneLayout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(lista2PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(borraSeleccionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(resetListaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lista2ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(borraSeleccionButton, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                     .addComponent(ordenaListaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         lista2PaneLayout.setVerticalGroup(
             lista2PaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,10 +213,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(borraSeleccionButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ordenaListaButton)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         addTolista2Button.setText("A lista 2 ->");
+        addTolista2Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTolista2ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,19 +239,12 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(lista1Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(addTolista2Button)
-                .addContainerGap(219, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(511, Short.MAX_VALUE)
-                    .addComponent(lista2Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(27, 27, 27)))
+                .addGap(18, 18, 18)
+                .addComponent(lista2Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(addTolista2Button)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,21 +253,95 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(0, 12, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addComponent(addTolista1Button)))
+                                .addComponent(addTolista1Button))
+                            .addComponent(datoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(authorLabel))))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(lista2Pane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lista2Pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addTolista2Button))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addTolista1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTolista1ButtonActionPerformed
+        String dato = datoTextField.getText();
+        if((dato==null) || dato.isEmpty()) return;
+        datoTextField.setText("");
+        int len = lista1Lista.getModel().getSize();
+        if(len==0){
+            String [] valores = new String[1];
+            valores[0] = dato;
+            lista1Lista.setListData(valores);
+        }
+        else{
+            lista1Lista.setSelectionInterval(0, len-1);
+            List valores = lista1Lista.getSelectedValuesList();
+            valores.add(dato);
+            lista1Lista.setListData(valores.toArray());
+        }
+    }//GEN-LAST:event_addTolista1ButtonActionPerformed
+
+    private void simplebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simplebuttonActionPerformed
+        // TODO add your handling code here:
+        lista1Lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }//GEN-LAST:event_simplebuttonActionPerformed
+
+    private void invervaloSimpleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invervaloSimpleButtonActionPerformed
+        // TODO add your handling code here:
+        lista1Lista.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+    }//GEN-LAST:event_invervaloSimpleButtonActionPerformed
+
+    private void multiplesIntervalosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplesIntervalosButtonActionPerformed
+        // TODO add your handling code here:
+        lista1Lista.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);        
+    }//GEN-LAST:event_multiplesIntervalosButtonActionPerformed
+
+    private void resetSelectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetSelectionButtonActionPerformed
+        // TODO add your handling code here:
+        try{
+       lista1Lista.setSelectedIndices(null);
+        }catch(NullPointerException e){}
+    }//GEN-LAST:event_resetSelectionButtonActionPerformed
+
+    private void addTolista2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTolista2ButtonActionPerformed
+        // TODO add your handling code here:
+        List seleccionados = lista1Lista.getSelectedValuesList();
+        lista2Lista.setListData(seleccionados.toArray());
+    }//GEN-LAST:event_addTolista2ButtonActionPerformed
+
+    private void resetListaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetListaButtonActionPerformed
+        // TODO add your handling code here:
+        List seleccionados = lista2Lista.getSelectedValuesList();
+        seleccionados.clear();
+        lista2Lista.setListData(seleccionados.toArray());
+    }//GEN-LAST:event_resetListaButtonActionPerformed
+
+    private void borraSeleccionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borraSeleccionButtonActionPerformed
+        // TODO add your handling code here:
+        List seleccionados = lista2Lista.getSelectedValuesList();
+        if(seleccionados.isEmpty()) return;
+        int len = lista2Lista.getModel().getSize();
+        lista2Lista.setSelectionInterval(0, len-1);
+        List listatotal = lista2Lista.getSelectedValuesList();
+        listatotal.removeAll(seleccionados);
+        lista2Lista.setListData(listatotal.toArray());
+    }//GEN-LAST:event_borraSeleccionButtonActionPerformed
+
+    private void ordenaListaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordenaListaButtonActionPerformed
+        // TODO add your handling code here:
+        int len = lista2Lista.getModel().getSize();
+        lista2Lista.setSelectionInterval(0, len-1);
+        List listatotal = lista2Lista.getSelectedValuesList();
+        Collections.sort(listatotal);
+        lista2Lista.setListData(listatotal.toArray());
+    }//GEN-LAST:event_ordenaListaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,7 +354,7 @@ public class MainFrame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windwows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -281,6 +385,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton borraSeleccionButton;
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JPanel datoPane;
+    private javax.swing.JTextField datoTextField;
     private javax.swing.JToggleButton invervaloSimpleButton;
     private javax.swing.JList lista1Lista;
     private javax.swing.JPanel lista1Pane;
